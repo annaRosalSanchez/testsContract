@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '3399:3399'
+    expose:
+      - '3399'
+    volumes:
+      - db_volume:/var/lib/mysql
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      timeout: 5s
+  pact-broker:
+    image: pactfoundation/pact-broker:2.76.0.0
+    restart: always
+    ports:
+      - "9299:9299"
+    depends_on:
+      - mysql
+    environment:
+      PACT_BROKER_PORT: '9299'
+      PACT_BROKER_DATABASE_ADAPTER: mysql2
+      PACT_BROKER_DATABASE_USERNAME: ${MYSQL_USER}
+      PACT_BROKER_DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      PACT_BROKER_DATABASE_HOST: mysql
+      PACT_BROKER_DATABASE_NAME: ${MYSQL_DATABASE}
+      PACT_BROKER_LOG_LEVEL: INFO
+      PACT_BROKER_SQL_LOG_LEVEL: DEBUG
+volumes:
+  db_volume:

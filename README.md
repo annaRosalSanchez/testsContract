@@ -1,6 +1,6 @@
 # Readme
 
-## How to launch PACT BROKER locally
+## How to launch Broker locally
 Write it in terminal:
 
     $ docker-compose build 

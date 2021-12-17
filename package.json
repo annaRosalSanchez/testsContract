@@ -1,0 +1,20 @@
+{
+  "name": "testscontract",
+  "version": "1.0.0",
+  "description": "api contract testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "qa",
+    "contract",
+    "testing",
+    "automation"
+  ],
+  "author": "Anna Rosal",
+  "license": "ISC",
+  "dependencies": {
+    "@pact-foundation/pact": "^9.17.0"
+  }
+}
